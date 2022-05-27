@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+option go_package = "limbic/protos/speech_emotion_recognition";
+package limbic.protos.speech_emotion_recognition;
+
+service SpeechEmotionRecognition {
+  rpc LoadData (stream Chunk) returns (LoadDataReply);
+}
+
+message Chunk {
+  bytes Content = 1;
+}
+
+message LoadDataRequest {
+  string ogrn = 1;
+}
+
+enum Emotion {
+  Angry = 0;
+  Calm = 1;
+  Disgust = 2;
+  Fear = 3;
+  Happy = 4;
+  Neutral = 5;
+  Sad = 6;
+  Surprise = 7;
+}
+
+message LoadDataReply {
+  Emotion emotion = 1;
+}
+
