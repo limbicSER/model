@@ -26,7 +26,6 @@ while True:
         audio_path: str = input("Audio file path: ")
         if audio_path == "stop":
             break
-        start = time.time()
         # if audio_path.split('.')[-1] != 'wav':
         #     old = audio_path
         #     # https://www.geeksforgeeks.org/how-to-install-ffmpeg-on-windows/
@@ -49,6 +48,5 @@ while True:
         y_pred = encoder.inverse_transform(probas)
         print(probas_percent)
         print(y_pred, max(probas_percent))
-        print(f"{round(time.time() - start, 3)} seconds")
     except:
         continue

@@ -70,7 +70,7 @@ if __name__ == '__main__':
     nogender_X = np.concatenate((female_X, male_X))
     nogender_Y = np.concatenate((female_Y, male_Y))
 
-    # nogender
+    # mixed gender
 
     x_train, x_test, y_train, y_test = train_test_split(nogender_X,
                                                         nogender_Y,

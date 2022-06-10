@@ -1,7 +1,6 @@
 import asyncio
 import io
 import sys
-import time
 
 import keras.models
 import librosa
@@ -20,12 +19,8 @@ model = keras.models.load_model("saved_models/total_model.h5")
 model.summary()
 mfcc = MFCC()
 
-dp = Datatset()
-_, males = dp.create_dfs()
-
 encoder = OneHotEncoder()
-encoder.fit_transform(np.array(males.labels).reshape(-1, 1)).toarray()
-
+encoder.fit_transform(np.array(['neutral', 'calm', 'happy', 'sad', 'angry', 'fear', 'disgust', 'surprise']).reshape(-1, 1)).toarray()
 y_map = {
     "angry": 0,
     "calm": 1,
@@ -56,6 +51,7 @@ class SpeechEmotionRecognitionService(SpeechEmotionRecognitionServicer):
 
         probas = model.predict(sample)
         probas_percent = [round(p * 100, 2) for p in probas[0]]
+        # print(np.array(males.labels).reshape(-1, 1))
         y_pred = encoder.inverse_transform(probas)
         print(probas_percent)
         # print(, max(probas_percent))
